@@ -14,15 +14,17 @@ import { IMAGES } from '../config';
 	<body>
 		<header>
 			<h1>Liam Gallagher</h1>
+			<a href="https://google.com" target="_blank"><img class="social-link" src="instagram.svg" alt="instagram"></a>
+			<a href="https://vero.co/liamg" target="_blank"><img class="social-link" src="vero.svg" alt="vero"></a>
 		</header>
 
 		<main id="images">
 			{
-				IMAGES.map((image, index) => (
-					<div class="gallery-item" id={image.name + index} style={"grid-column: span " + image.width + "; grid-row: span " + image.height + ";"} >
+				IMAGES.map(image => (
+					<div class="gallery-item" id={image.name} style={"grid-column: span " + image.width + "; grid-row: span " + image.height + ";"} >
 						<img src={"images/" + image.src} alt={image.name} />
 						<div class="social-icons">
-							<a href={'#' + image.name + index}><img class="social-logo" src="copy.svg" alt="copy logo" /></a>
+							<a href={'#' + image.name}><img class="social-logo" src="copy.svg" alt="copy logo" /></a>
 							{
 								image.instagram !== undefined ? <a href={image.instagram}><img class="social-logo" src="instagram.svg" alt="instagram logo" /></a> : ""
 							}
@@ -97,6 +99,18 @@ import { IMAGES } from '../config';
 	.gallery-item:hover .social-icons {
 		opacity: 100%;
 		transform: translateY(0);
+	}
+
+	h1 {
+		display: inline;
+		padding-right: 1rem;
+	}
+
+	.social-link {
+		width: 2rem;
+		text-align: center;
+		vertical-align: -25%;
+		float: right;
 	}
 
 	@media screen and (max-width: 1200px) {
