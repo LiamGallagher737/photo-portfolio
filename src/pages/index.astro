@@ -5,7 +5,7 @@ import { IMAGES } from '../config';
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -21,6 +21,15 @@ import { IMAGES } from '../config';
 				IMAGES.map((image, index) => (
 					<div class="gallery-item" id={image.name + index} style={"grid-column: span " + image.width + "; grid-row: span " + image.height + ";"} >
 						<img src={"images/" + image.src} alt={image.name} />
+						<div class="social-icons">
+							<a href={'#' + image.name + index}><img class="social-logo" src="copy.svg" alt="copy logo" /></a>
+							{
+								image.instagram !== undefined ? <a href={image.instagram}><img class="social-logo" src="instagram.svg" alt="instagram logo" /></a> : ""
+							}
+							{
+								image.vero !== undefined ? <a href={image.vero}><img class="social-logo" src="vero.svg" alt="vero logo" /></a> : ""
+							}
+						</div>
 					</div>
 				))
 			}
@@ -66,8 +75,28 @@ import { IMAGES } from '../config';
 		transition: .5s ease-in-out;
 	}
 
-	.gallery-item img:hover {
+	.gallery-item:hover img {
 		transform: scale(105%);
+	}
+
+	.gallery-item .social-icons {
+		opacity: 0%;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		transition: .5s ease-in-out;
+		transform: translateY(10px);
+		padding-right: .25rem;
+	}
+
+	.gallery-item .social-icons img {
+		filter: invert(100%);
+		width: 2rem;
+	}
+
+	.gallery-item:hover .social-icons {
+		opacity: 100%;
+		transform: translateY(0);
 	}
 
 	@media screen and (max-width: 1200px) {
